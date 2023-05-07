@@ -15,9 +15,10 @@ class RedactorAdmin(UserAdmin):
                 "Additional info",
                 {
                     "fields": (
+                        "years_of_experience",
                         "first_name",
                         "last_name",
-                        "years_of_experience",
+                        "email",
                     )
                 },
             ),
@@ -29,6 +30,9 @@ class RedactorAdmin(UserAdmin):
 class NewspaperAdmin(admin.ModelAdmin):
     search_fields = ("title",)
     list_filter = ("topic",)
+    list_display = ["title", "topic", "published_date"]
 
 
-admin.site.register(Topic)
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
