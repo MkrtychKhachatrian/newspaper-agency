@@ -4,7 +4,7 @@
 {% block content %}
   <h1>
     Topic List
-    <a href="#" class="btn btn-primary link-to-page">
+    <a href="{% url 'agency:topic-create' %}" class="btn btn-primary link-to-page">
       Create
     </a>
   </h1>
@@ -32,13 +32,13 @@
               {{ topic.name }}
           </td>
           <td>
-              <a href="{% url '#' pk=topic.id %}">
+              <a href="{% url 'agency:topic-update' pk=topic.id %}">
                 Update
               </a>
             </td>
             <td>
               <a style="color: red"
-                href="{% url '#' pk=topic.id %}">
+                href="{% url 'agency:topic-delete' pk=topic.id %}">
                 Delete
               </a>
             </td>
