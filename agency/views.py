@@ -70,7 +70,7 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
-    model = Redactor
+    model = get_user_model()
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -95,3 +95,8 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
             )
 
         return queryset
+
+
+class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
+    model = get_user_model()
+    queryset = get_user_model().objects.all().prefetch_related("newspapers__topic")
