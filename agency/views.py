@@ -100,3 +100,16 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
     queryset = get_user_model().objects.all().prefetch_related("newspapers__topic")
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    pass
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    pass
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    pass
+

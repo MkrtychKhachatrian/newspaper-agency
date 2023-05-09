@@ -4,7 +4,7 @@
 {% block content %}
     <h1>
       Redactor List
-      <a href="{% url 'taxi:driver-create' %}" class="btn btn-primary link-to-page">
+      <a href="#" class="btn btn-primary link-to-page">
         Create
       </a>
     </h1>
@@ -25,7 +25,7 @@
       </tr>
     {% for redactor in redactor_list %}
       <tr>
-        <td>{{ driver.id }}</td>
+        <td>{{ redactor.id }}</td>
         <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }} {% if user == redactor %} (Me){% endif %}</a></td>
         <td>{{ redactor.first_name }}</td>
         <td>{{ redactor.last_name }}</td>

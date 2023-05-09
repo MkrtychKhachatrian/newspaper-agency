@@ -1,6 +1,7 @@
 from django.urls import path
 
-from agency.views import index, TopicListView, TopicCreateView, TopicUpdateView, TopicDeleteView, RedactorListView
+from agency.views import index, TopicListView, TopicCreateView, TopicUpdateView, TopicDeleteView, RedactorListView, \
+    RedactorDetailView, RedactorCreateView, RedactorUpdateView, RedactorDeleteView
 
 urlpatterns = [
     path("", index, name="index"),
