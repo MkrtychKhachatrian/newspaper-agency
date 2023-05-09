@@ -114,5 +114,6 @@ class RedactorExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
-    pass
+    model = get_user_model()
+    success_url = reverse_lazy("agency:redactor-list")
 

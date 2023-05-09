@@ -1,7 +1,7 @@
 from django.urls import path
 
 from agency.views import index, TopicListView, TopicCreateView, TopicUpdateView, TopicDeleteView, RedactorListView, \
-    RedactorDetailView, RedactorCreateView, RedactorUpdateView, RedactorDeleteView
+    RedactorDetailView, RedactorCreateView, RedactorExperienceUpdateView, RedactorDeleteView
 
 urlpatterns = [
     path("", index, name="index"),
@@ -42,7 +42,7 @@ urlpatterns = [
     ),
     path(
         "redactors/<int:pk>/update/",
-        RedactorUpdateView.as_view(),
+        RedactorExperienceUpdateView.as_view(),
         name="redactor-update",
     ),
     path(
