@@ -25,7 +25,7 @@
     {% for newspaper in newspaper_list %}
       <tr>
         <td>{{ newspaper.id }}</td>
-        <td><a href="#">{{ newspaper.title }}</a></td>
+        <td><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></td>
         <td>{{ newspaper.topic.name }}</td>
         <td>{{ newspaper.published_date }}</td>
       </tr>

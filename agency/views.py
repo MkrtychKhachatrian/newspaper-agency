@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -141,3 +142,19 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
             )
 
         return queryset
+
+
+class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Newspaper
+
+
+@login_required
+def toggle_assign_to_newspaper(request, pk):
+    redactor = get_user_model().objects.get(id=request.user.id)
+    if (
+        Newspaper.objects.get(id=pk) in redactor.newspapers.all()
+    ):
+        redactor.newspapers.remove(pk)
+    else:
+        redactor.cars.add(pk)
+    return HttpResponseRedirect(reverse_lazy("agency:newspaper-detail", args=[pk]))

@@ -1,7 +1,8 @@
 from django.urls import path
 
 from agency.views import index, TopicListView, TopicCreateView, TopicUpdateView, TopicDeleteView, RedactorListView, \
-    RedactorDetailView, RedactorCreateView, RedactorExperienceUpdateView, RedactorDeleteView, NewspaperListView
+    RedactorDetailView, RedactorCreateView, RedactorExperienceUpdateView, RedactorDeleteView, NewspaperListView, \
+    NewspaperDetailView, toggle_assign_to_newspaper
 
 urlpatterns = [
     path("", index, name="index"),
@@ -54,6 +55,14 @@ urlpatterns = [
         "newspapers/",
         NewspaperListView.as_view(),
         name="newspaper-list",
+    ),
+    path("newspapers/<int:pk>/",
+         NewspaperDetailView.as_view(),
+         name="newspaper-detail"),
+    path(
+        "newspapers/<int:pk>/toggle-assign/",
+        toggle_assign_to_newspaper,
+        name="toggle-newspaper-assign",
     ),
 ]
 
