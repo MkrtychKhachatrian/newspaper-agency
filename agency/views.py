@@ -5,7 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from agency.forms import TopicSearchForm, RedactorSearchForm, RedactorCreationForm, RedactorExperienceUpdateForm
+from agency.forms import TopicSearchForm, RedactorSearchForm, RedactorCreationForm, RedactorExperienceUpdateForm, \
+    NewspaperSearchForm
 from agency.models import Redactor, Newspaper, Topic
 
 
@@ -116,3 +117,29 @@ class RedactorExperienceUpdateView(LoginRequiredMixin, generic.UpdateView):
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = get_user_model()
     success_url = reverse_lazy("agency:redactor-list")
+
+
+class NewspaperListView(LoginRequiredMixin, generic.ListView):
+    model = Newspaper
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = NewspaperSearchForm(initial={"title": title})
+
+        return context
+
+    def get_queryset(self):
+        queryset = Newspaper.objects.select_related("topic")
+
+        form = NewspaperSearchForm(self.request.GET)
+
+        if form.is_valid():
+            return queryset.filter(
+                title__icontains=form.cleaned_data["title"]
+            )
+
+        return queryset
