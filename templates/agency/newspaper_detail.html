@@ -3,7 +3,7 @@
 {% block content %}
   <h1>
     {{ newspaper.title }}
-    <a href="#" class="btn btn-secondary link-to-page">
+    <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
       Update
     </a>
 
