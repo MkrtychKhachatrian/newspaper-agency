@@ -27,7 +27,7 @@ class PrivateRedactorTests(TestCase):
             years_of_experience=3,
         )
 
-    def test_create_driver(self):
+    def test_create_redactor(self):
         form_data = {
             "username": "new.user",
             "password1": "testpass123",
@@ -45,7 +45,7 @@ class PrivateRedactorTests(TestCase):
         self.assertEqual(new_user.last_name, form_data["last_name"])
         self.assertEqual(new_user.years_of_experience, form_data["years_of_experience"])
 
-    def test_retrieve_drivers(self):
+    def test_retrieve_redactors(self):
         response = self.client.get(REDACTOR_LIST_URL)
         drivers = get_user_model().objects.all()
 
