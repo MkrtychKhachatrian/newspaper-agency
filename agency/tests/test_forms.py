@@ -30,7 +30,8 @@ class ExperienceValidationTests(TestCase):
                                     data={"years_of_experience": 101})
 
         self.assertFormError(response, "form", "years_of_experience",
-                             "You can't be this old :) Years of experience can't be more than 100")
+                             "You can't be this old :) Years of experience "
+                             "can't be more than 100")
 
 
 class SearchFormsTests(TestCase):

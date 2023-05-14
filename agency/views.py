@@ -6,8 +6,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from agency.forms import TopicSearchForm, RedactorSearchForm, RedactorCreationForm, RedactorExperienceUpdateForm, \
-    NewspaperSearchForm, NewspaperForm
+from agency.forms import (
+    TopicSearchForm,
+    RedactorSearchForm,
+    RedactorCreationForm,
+    RedactorExperienceUpdateForm,
+    NewspaperSearchForm,
+    NewspaperForm)
 from agency.models import Redactor, Newspaper, Topic
 
 
@@ -99,7 +104,9 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
-    queryset = get_user_model().objects.all().prefetch_related("newspapers__topic")
+    queryset = get_user_model().objects.all().prefetch_related(
+        "newspapers__topic"
+    )
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
@@ -174,4 +181,6 @@ def toggle_assign_to_newspaper(request, pk):
         redactor.newspapers.remove(pk)
     else:
         redactor.cars.add(pk)
-    return HttpResponseRedirect(reverse_lazy("agency:newspaper-detail", args=[pk]))
+    return HttpResponseRedirect(
+        reverse_lazy("agency:newspaper-detail", args=[pk])
+    )

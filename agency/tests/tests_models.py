@@ -35,7 +35,8 @@ class ModelsTests(TestCase):
         )
 
     def test_newspaper_str(self):
-        self.assertEqual(str(self.newspaper), f"{self.newspaper.title} ({self.newspaper.topic})")
+        self.assertEqual(str(self.newspaper),
+                         f"{self.newspaper.title} ({self.newspaper.topic})")
 
     def test_create_redactor_with_years_of_experience(self):
         username = "test username"
@@ -44,7 +45,8 @@ class ModelsTests(TestCase):
 
         self.assertEqual(self.redactor.username, username)
         self.assertTrue(self.redactor.check_password(password))
-        self.assertEqual(self.redactor.years_of_experience, years_of_experience)
+        self.assertEqual(self.redactor.years_of_experience,
+                         years_of_experience)
 
     def test_redactor_get_absolute_url(self):
         self.assertEqual(self.redactor.get_absolute_url(), "/redactors/1/")

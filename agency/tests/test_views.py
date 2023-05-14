@@ -43,12 +43,14 @@ class PrivateRedactorTests(TestCase):
 
         self.assertEqual(new_user.first_name, form_data["first_name"])
         self.assertEqual(new_user.last_name, form_data["last_name"])
-        self.assertEqual(new_user.years_of_experience, form_data["years_of_experience"])
+        self.assertEqual(new_user.years_of_experience,
+                         form_data["years_of_experience"])
 
     def test_retrieve_redactors(self):
         response = self.client.get(REDACTOR_LIST_URL)
         drivers = get_user_model().objects.all()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(response.context["redactor_list"]), list(drivers))
+        self.assertEqual(list(response.context["redactor_list"]),
+                         list(drivers))
         self.assertTemplateUsed(response, "agency/redactor_list.html")

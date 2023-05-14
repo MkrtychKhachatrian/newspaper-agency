@@ -25,7 +25,9 @@ class RedactorCreationForm(UserCreationForm):
         )
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+        return validate_years_of_experience(
+            self.cleaned_data["years_of_experience"]
+        )
 
 
 class RedactorExperienceUpdateForm(forms.ModelForm):
@@ -34,7 +36,9 @@ class RedactorExperienceUpdateForm(forms.ModelForm):
         fields = ["years_of_experience"]
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+        return validate_years_of_experience(
+            self.cleaned_data["years_of_experience"]
+        )
 
 
 class RedactorSearchForm(forms.Form):
