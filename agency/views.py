@@ -180,7 +180,7 @@ def toggle_assign_to_newspaper(request, pk):
     ):
         redactor.newspapers.remove(pk)
     else:
-        redactor.cars.add(pk)
+        redactor.newspapers.add(pk)
     return HttpResponseRedirect(
         reverse_lazy("agency:newspaper-detail", args=[pk])
     )
