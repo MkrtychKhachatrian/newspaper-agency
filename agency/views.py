@@ -12,7 +12,8 @@ from agency.forms import (
     RedactorCreationForm,
     RedactorExperienceUpdateForm,
     NewspaperSearchForm,
-    NewspaperForm)
+    NewspaperForm,
+)
 from agency.models import Redactor, Newspaper, Topic
 
 
@@ -23,9 +24,9 @@ def index(request):
     num_topics = Topic.objects.count()
 
     context = {
-       "num_redactors": num_redactors,
-       "num_newspapers": num_newspapers,
-       "num_topics": num_topics,
+        "num_redactors": num_redactors,
+        "num_newspapers": num_newspapers,
+        "num_topics": num_topics,
     }
 
     return render(request, "agency/index.html", context=context)
@@ -50,9 +51,7 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
         form = TopicSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
 
         return queryset
 
@@ -83,9 +82,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
         username = self.request.GET.get("username", "")
 
-        context["search_form"] = RedactorSearchForm(
-            initial={"username": username}
-        )
+        context["search_form"] = RedactorSearchForm(initial={"username": username})
 
         return context
 
@@ -95,18 +92,14 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
         form = RedactorSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                username__icontains=form.cleaned_data["username"]
-            )
+            return queryset.filter(username__icontains=form.cleaned_data["username"])
 
         return queryset
 
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
-    queryset = get_user_model().objects.all().prefetch_related(
-        "newspapers__topic"
-    )
+    queryset = get_user_model().objects.all().prefetch_related("newspapers__topic")
 
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
@@ -144,9 +137,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
         form = NewspaperSearchForm(self.request.GET)
 
         if form.is_valid():
-            return queryset.filter(
-                title__icontains=form.cleaned_data["title"]
-            )
+            return queryset.filter(title__icontains=form.cleaned_data["title"])
 
         return queryset
 
@@ -175,12 +166,8 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 @login_required
 def toggle_assign_to_newspaper(request, pk):
     redactor = get_user_model().objects.get(id=request.user.id)
-    if (
-        Newspaper.objects.get(id=pk) in redactor.newspapers.all()
-    ):
+    if Newspaper.objects.get(id=pk) in redactor.newspapers.all():
         redactor.newspapers.remove(pk)
     else:
         redactor.newspapers.add(pk)
-    return HttpResponseRedirect(
-        reverse_lazy("agency:newspaper-detail", args=[pk])
-    )
+    return HttpResponseRedirect(reverse_lazy("agency:newspaper-detail", args=[pk]))

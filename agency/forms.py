@@ -11,7 +11,7 @@ class TopicSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by name.."})
+        widget=forms.TextInput(attrs={"placeholder": "Search by name.."}),
     )
 
 
@@ -25,9 +25,7 @@ class RedactorCreationForm(UserCreationForm):
         )
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(
-            self.cleaned_data["years_of_experience"]
-        )
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
 
 class RedactorExperienceUpdateForm(forms.ModelForm):
@@ -36,9 +34,7 @@ class RedactorExperienceUpdateForm(forms.ModelForm):
         fields = ["years_of_experience"]
 
     def clean_years_of_experience(self):
-        return validate_years_of_experience(
-            self.cleaned_data["years_of_experience"]
-        )
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
 
 class RedactorSearchForm(forms.Form):
@@ -46,7 +42,7 @@ class RedactorSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by username.."})
+        widget=forms.TextInput(attrs={"placeholder": "Search by username.."}),
     )
 
 
@@ -66,5 +62,5 @@ class NewspaperSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by title.."})
+        widget=forms.TextInput(attrs={"placeholder": "Search by title.."}),
     )

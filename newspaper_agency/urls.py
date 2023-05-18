@@ -24,5 +24,5 @@ urlpatterns = [
     path("", include("agency.urls", namespace="agency")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
-    path('djrichtextfield/', include('djrichtextfield.urls')),
+    path("djrichtextfield/", include("djrichtextfield.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
