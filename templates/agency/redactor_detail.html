@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<section class="pt-5 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <h1>
+          Username: {{ redactor.username }}
+
+          <a href="{% url 'agency:redactor-update' pk=redactor.id %}" class="btn btn-secondary link-to-page">
+            Update years of experience
+          </a>
+
+          <a href="{% url 'agency:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
+            Delete
+          </a>
+        </h1>
+
+        <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+        <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+        <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+        <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+        <div class="ml-3">
+          <h4>Newspapers</h4>
+
+          {% for newspaper in redactor.newspapers.all %}
+              <hr>
+              <p><strong>Title:</strong> <a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></p>
+              <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+              <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
+
+          {% empty %}
+            <p>No newspapers!</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+

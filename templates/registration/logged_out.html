@@ -1,0 +1,47 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Sign IN {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} sign-in-illustration {% endblock body_class %}
+
+{% block content %}
+
+  {% include "includes/navigation-auth.html" %}
+
+  <section>
+    <div class="page-header section-height-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+            <div class="card card-plain">
+              <h1>Logged out!</h1>
+              <a href="{% url 'login'%}">Click here to login again.</a>
+            </div>
+          </div>
+          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+            <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+              <img src="{{ ASSETS_ROOT }}/img/background-auth.jpg" alt="pattern-lines" class="position-absolute opacity-5 start-0">
+              <h3 class="mt-5 font-weight-bolder" style="color: #cb0c9f">
+                Newspaper Agency
+              </h3>
+              <p style="color: #cb0c9f">
+                Created by Mkrtych Khachatrian
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}
