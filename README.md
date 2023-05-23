@@ -5,6 +5,8 @@ Django project for managing a newspaper agency with newspapers, redactors and to
 ## Check it out!
 
 [Newspaper Agency Project deployed to Render](https://newspaper-agency-xfk4.onrender.com/)
+* Login: test.user
+* Password: TestPass123
 
 ## Installation
 
