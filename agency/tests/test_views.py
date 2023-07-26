@@ -45,8 +45,8 @@ class PrivateRedactorTests(TestCase):
 
     def test_retrieve_redactors(self):
         response = self.client.get(REDACTOR_LIST_URL)
-        drivers = get_user_model().objects.all()
+        redactors = get_user_model().objects.all()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(response.context["redactor_list"]), list(drivers))
+        self.assertEqual(list(response.context["redactor_list"]), list(redactors))
         self.assertTemplateUsed(response, "agency/redactor_list.html")
