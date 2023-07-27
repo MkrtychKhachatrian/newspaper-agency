@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<section class="pt-5 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <h1>
+          Newspapers
+          <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary link-to-page">
+            Create
+          </a>
+        </h1>
+
+        <form action="" method="get" class="form-inline">
+          {{ search_form|crispy }}
+          <input class="btn btn-secondary" type="submit" value="🔎">
+        </form>
+
+        {% if newspaper_list %}
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Topic</th>
+              <th>Published date</th>
+            </tr>
+          {% for newspaper in newspaper_list %}
+            <tr>
+              <td>{{ newspaper.id }}</td>
+              <td><a href="{% url 'agency:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></td>
+              <td>{{ newspaper.topic.name }}</td>
+              <td>{{ newspaper.published_date }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+        {% else %}
+          <p>There are no newspapers in agency</p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

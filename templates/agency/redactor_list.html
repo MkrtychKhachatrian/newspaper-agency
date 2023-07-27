@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<section class="pt-5 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <h1>
+          Redactors
+          <a href="{% url 'agency:redactor-create' %}" class="btn btn-primary link-to-page">
+            Create
+          </a>
+        </h1>
+
+        <form action="" method="get" class="form-inline">
+          {{ search_form|crispy }}
+          <input class="btn btn-secondary" type="submit" value="🔎">
+        </form>
+
+        {% if redactor_list %}
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Years of experience</th>
+          </tr>
+        {% for redactor in redactor_list %}
+          <tr>
+            <td>{{ redactor.id }}</td>
+            <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }} {% if user == redactor %} (Me){% endif %}</a></td>
+            <td>{{ redactor.first_name }}</td>
+            <td>{{ redactor.last_name }}</td>
+            <td>{{ redactor.years_of_experience }}</td>
+          </tr>
+        {% endfor %}
+
+        </table>
+        {% else %}
+          <p>There are no redactors in the agency.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

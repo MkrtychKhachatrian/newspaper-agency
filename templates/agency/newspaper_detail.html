@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<section class="pt-5 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+        <h1>
+          {{ newspaper.title }}
+          <a href="{% url 'agency:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
+            Update
+          </a>
+
+          <a href="{% url 'agency:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+            Delete
+          </a>
+
+        </h1>
+        <p><h4>Topic: {{ newspaper.topic.name }}</h4></p>
+
+        <div style="text-align: justify">{{ newspaper.content|safe }}</div>
+
+        <h1>
+          Publishers
+
+          {% if newspaper in user.newspapers.all %}
+            <a href="{% url 'agency:toggle-newspaper-assign' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+              Delete me from this newspaper
+            </a>
+          {% else %}
+            <a href="{% url 'agency:toggle-newspaper-assign' pk=newspaper.id %}" class="btn btn-success link-to-page">
+              Assign me to this newspaper
+            </a>
+          {% endif %}
+
+        </h1>
+        <hr>
+        <ul>
+          {% for newspaper in newspaper.publishers.all %}
+            <li>{{ newspaper.username }} ({{ newspaper.first_name }} {{ newspaper.last_name }})</li>
+          {% endfor %}
+        </ul>
+      {% endblock %}
+      </div>
+    </div>
+  </div>
+</section>
